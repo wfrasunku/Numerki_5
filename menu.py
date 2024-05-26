@@ -67,6 +67,35 @@ def precision_menu():
         print("Niepoprawna dokładność!")
         return precision_menu()
 
+def interval_menu():
+    while True:
+        try:
+            left_boundary = float(input('\nPodaj lewą granicę przedziału: '))
+            right_boundary = float(input('Podaj prawą granicę przedziału: '))
+
+            if right_boundary <= left_boundary:
+                print('Prawa granica przedziału musi być większa od lewej granicy!')
+            else:
+                nodes_value = int(input('Podaj ilość węzłów: '))
+                break
+        except ValueError:
+            print('Niepoprawna wartość!')
+
+    return left_boundary, right_boundary, nodes_value
+
+def approximation_menu():
+    while True:
+        try:
+            approx = int(input('\nPodaj stopień aproksymacji wielomianu: '))
+
+            if approx < 0:
+                print('Stopień musi być >= 0!')
+            else:
+                break
+        except ValueError:
+            print('Niepoprawna wartość!')
+
+    return approx
 
 def read_data(file_path, n):
     data = []
