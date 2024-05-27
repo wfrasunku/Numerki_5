@@ -13,14 +13,15 @@ def main():
     nodes_value = menu.nodes_menu()
     data = menu.read_data(file_path, nodes_value)
     n = menu.approximation_menu()
-    array = functionSolving.chebyshev_coef(functions_list, nodes_value, data, n)
-
+    array = functionSolving.chebyshev_approximation(functions_list, nodes_value, data, n)
+    error = functionSolving.approximation_error(functions_list, nodes_value, data, n, array)
+    print("Blad aproksymacji:", error)
     plt.rcParams['figure.figsize'] = config.PLOT_FIGURE_SIZE
     plt.rcParams['figure.autolayout'] = True
     plt.rcParams['figure.dpi'] = config.PLOT_FIGURE_DPI
 
     x_plot = numpy.linspace(left_boundary, right_boundary, 1000)
-    y_gauss = functionSolving.chebyshev_calc(n, x_plot, array)
+    y_gauss = functionSolving.approximation_evaluate(n, x_plot, array)
     plt.plot(x_plot, y_gauss, color=config.PLOT_LAGRANGE_COLOR, label='Aproksymowany wielomian', linewidth=2)
 
     y_poly: list[float] = [mathLib.evaluate_composite(e, functions_list) for e in x_plot]
