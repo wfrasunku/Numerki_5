@@ -2,11 +2,8 @@ import mathLib
 import menu
 import config
 import numpy
-import pylab as pb
 import functionSolving
 import matplotlib.pyplot as plt
-import pandas as pd
-import matplotlib.image as mpimg
 
 
 def main():
@@ -16,14 +13,14 @@ def main():
     nodes_value = menu.nodes_menu()
     data = menu.read_data(file_path, nodes_value)
     n = menu.approximation_menu()
-    tab_wsp = functionSolving.wsp_wielomian(functions_list, nodes_value, data, n)
+    array = functionSolving.chebyshev_coef(functions_list, nodes_value, data, n)
 
     plt.rcParams['figure.figsize'] = config.PLOT_FIGURE_SIZE
     plt.rcParams['figure.autolayout'] = True
     plt.rcParams['figure.dpi'] = config.PLOT_FIGURE_DPI
 
     x_plot = numpy.linspace(left_boundary, right_boundary, 1000)
-    y_gauss = functionSolving.wart_wielomian(n, x_plot, tab_wsp)
+    y_gauss = functionSolving.chebyshev_calc(n, x_plot, array)
     plt.plot(x_plot, y_gauss, color=config.PLOT_LAGRANGE_COLOR, label='Aproksymowany wielomian', linewidth=2)
 
     y_poly: list[float] = [mathLib.evaluate_composite(e, functions_list) for e in x_plot]

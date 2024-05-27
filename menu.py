@@ -67,6 +67,7 @@ def precision_menu():
         print("Niepoprawna dokładność!")
         return precision_menu()
 
+
 def interval_menu():
     while True:
         try:
@@ -82,6 +83,7 @@ def interval_menu():
 
     return left_boundary, right_boundary
 
+
 def nodes_menu():
     while True:
         try:
@@ -95,6 +97,7 @@ def nodes_menu():
             print('Niepoprawna wartość!')
 
     return nodes_value
+
 
 def approximation_menu():
     while True:
