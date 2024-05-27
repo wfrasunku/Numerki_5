@@ -36,11 +36,12 @@ def approximation_evaluate(n: int, x: float, array: list) -> float:
     return result
 
 
-def approximation_error(functions: list, nodes_amount: int, data: list, n: int, array: list):
+def approximation_error(functions: list, nodes_amount: int, data: list, n: int, array: list, a: float, b: float) -> float:
     error = 0
     for i in range(nodes_amount):
         w = data[i][0]
         x = data[i][1]
-        # x = - 1 + 2 * (x - a)/(b - a)
-        error += w * (mathLib.evaluate_composite(x, functions) - approximation_evaluate(n, x, array))**2
+        u = (2 * x - a - b) / (b - a)
+        error += w * (mathLib.evaluate_composite(u, functions) - approximation_evaluate(n, u, array))**2
+    error = error ** 1/2
     return error

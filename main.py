@@ -9,18 +9,18 @@ import matplotlib.pyplot as plt
 def main():
     file_path = 'chebyshev.txt'
     functions_list = menu.functions_menu()
-    left_boundary, right_boundary = menu.interval_menu()
+    a, b = menu.interval_menu()
     nodes_value = menu.nodes_menu()
     data = menu.read_data(file_path, nodes_value)
     n = menu.approximation_menu()
     array = functionSolving.chebyshev_approximation(functions_list, nodes_value, data, n)
-    error = functionSolving.approximation_error(functions_list, nodes_value, data, n, array)
+    error = functionSolving.approximation_error(functions_list, nodes_value, data, n, array, a, b)
     print("Blad aproksymacji:", error)
     plt.rcParams['figure.figsize'] = config.PLOT_FIGURE_SIZE
     plt.rcParams['figure.autolayout'] = True
     plt.rcParams['figure.dpi'] = config.PLOT_FIGURE_DPI
 
-    x_plot = numpy.linspace(left_boundary, right_boundary, 1000)
+    x_plot = numpy.linspace(a, b, 1000)
     y_gauss = functionSolving.approximation_evaluate(n, x_plot, array)
     plt.plot(x_plot, y_gauss, color=config.PLOT_LAGRANGE_COLOR, label='Aproksymowany wielomian', linewidth=2)
 
