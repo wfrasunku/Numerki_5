@@ -12,11 +12,11 @@ import matplotlib.image as mpimg
 def main():
     file_path = 'chebyshev.txt'
     functions_list = menu.functions_menu()
-    left_boundary, right_boundary, nodes_value = menu.interval_menu()
+    left_boundary, right_boundary = menu.interval_menu()
+    nodes_value = menu.nodes_menu()
     data = menu.read_data(file_path, nodes_value)
     n = menu.approximation_menu()
     tab_wsp = functionSolving.wsp_wielomian(functions_list, nodes_value, data, n)
-    # abc = functionSolving.chebyshev_approximation(functions_list, nodes_value, data, n, left_boundary, right_boundary)
 
     plt.rcParams['figure.figsize'] = config.PLOT_FIGURE_SIZE
     plt.rcParams['figure.autolayout'] = True
@@ -24,14 +24,14 @@ def main():
 
     x_plot = numpy.linspace(left_boundary, right_boundary, 1000)
     y_gauss = functionSolving.wart_wielomian(n, x_plot, tab_wsp)
-    plt.plot(x_plot, y_gauss, color=config.PLOT_LAGRANGE_COLOR, label='Interpolacja Lagrange\'a', linewidth=2)
+    plt.plot(x_plot, y_gauss, color=config.PLOT_LAGRANGE_COLOR, label='Aproksymowany wielomian', linewidth=2)
 
     y_poly: list[float] = [mathLib.evaluate_composite(e, functions_list) for e in x_plot]
     plt.plot(x_plot, y_poly, color=config.PLOT_POLY_COLOR, label="Oryginalna funkcja", linestyle='dashed')
 
     plt.xlabel('x', fontsize=config.PLOT_LABEL_FONT_SIZE)
     plt.ylabel('f(x)', fontsize=config.PLOT_LABEL_FONT_SIZE)
-    plt.title('Ekstrapolacja Czybyszew\'a', fontsize=config.PLOT_TITLE_FONT_SIZE)
+    plt.title('Chebyshev approximation', fontsize=config.PLOT_TITLE_FONT_SIZE)
     plt.legend()
 
     plt.grid(True)

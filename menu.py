@@ -76,12 +76,25 @@ def interval_menu():
             if right_boundary <= left_boundary:
                 print('Prawa granica przedziału musi być większa od lewej granicy!')
             else:
-                nodes_value = int(input('Podaj ilość węzłów: '))
                 break
         except ValueError:
             print('Niepoprawna wartość!')
 
-    return left_boundary, right_boundary, nodes_value
+    return left_boundary, right_boundary
+
+def nodes_menu():
+    while True:
+        try:
+            nodes_value = int(input('\nPodaj ilość węzłów Czebyszewa: '))
+
+            if nodes_value < 2 or nodes_value > 99:
+                print('Ilość węzłów poza przedziałem!')
+            else:
+                break
+        except ValueError:
+            print('Niepoprawna wartość!')
+
+    return nodes_value
 
 def approximation_menu():
     while True:
@@ -96,6 +109,7 @@ def approximation_menu():
             print('Niepoprawna wartość!')
 
     return approx
+
 
 def read_data(file_path, n):
     data = []
