@@ -26,6 +26,7 @@ def main():
             error = functionSolving.approximation_error(functions_list, nodes_value, data, n, array, a, b)
             if error < precision:
                 working = False
+                print("Ostateczny stopień wielomianu Czebyszewa to: ", n)
             else:
                 n += 1
 
@@ -36,7 +37,7 @@ def main():
 
     x_plot = numpy.linspace(a, b, 1000)
     y_gauss = functionSolving.approximation_evaluate(n, x_plot, array)
-    plt.plot(x_plot, y_gauss, color=config.PLOT_LAGRANGE_COLOR, label='Aproksymowany wielomian', linewidth=2)
+    plt.plot(x_plot, y_gauss, color=config.PLOT_LAGRANGE_COLOR, label='Aproksymowana funckja', linewidth=2)
 
     y_poly: list[float] = [mathLib.evaluate_composite(e, functions_list) for e in x_plot]
     plt.plot(x_plot, y_poly, color=config.PLOT_POLY_COLOR, label="Oryginalna funkcja", linestyle='dashed')
