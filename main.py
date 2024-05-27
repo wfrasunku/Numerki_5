@@ -12,9 +12,23 @@ def main():
     a, b = menu.interval_menu()
     nodes_value = menu.nodes_menu()
     data = menu.read_data(file_path, nodes_value)
-    n = menu.approximation_menu()
-    array = functionSolving.chebyshev_approximation(functions_list, nodes_value, data, n)
-    error = functionSolving.approximation_error(functions_list, nodes_value, data, n, array, a, b)
+    choice = menu.working_mode()
+    if choice == 1:
+        n = menu.approximation_menu()
+        array = functionSolving.chebyshev_approximation(functions_list, nodes_value, data, n)
+        error = functionSolving.approximation_error(functions_list, nodes_value, data, n, array, a, b)
+    else:
+        precision = menu.precision_menu()
+        n = 1
+        working = True
+        while working:
+            array = functionSolving.chebyshev_approximation(functions_list, nodes_value, data, n)
+            error = functionSolving.approximation_error(functions_list, nodes_value, data, n, array, a, b)
+            if error < precision:
+                working = False
+            else:
+                n += 1
+
     print("Blad aproksymacji:", error)
     plt.rcParams['figure.figsize'] = config.PLOT_FIGURE_SIZE
     plt.rcParams['figure.autolayout'] = True

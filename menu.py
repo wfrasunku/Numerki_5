@@ -55,17 +55,34 @@ def functions_menu():
     return functions_list
 
 
+def working_mode():
+    while True:
+        print("\n 1. Stopień wielomianu aproksymacyjnego"
+              "\n 2. Oczekiwany błąd aproksymacji")
+        try:
+            choice = int(input("Twój wybór: "))
+            if choice == 1 or choice == 2:
+                break
+            else:
+                print("dokładność musi być większy niż 0!")
+        except ValueError:
+            print("Niepoprawna dokładność!")
+
+    return choice
+
+
 def precision_menu():
-    try:
-        precision = float(input("Wprowadź dokładność: "))
-        if precision > 0:
-            return precision
-        else:
-            print("dokładność musi być większy niż 0!")
-            return precision_menu()
-    except ValueError:
-        print("Niepoprawna dokładność!")
-        return precision_menu()
+    while True:
+        try:
+            precision = float(input("Wprowadź dokładność: "))
+            if precision > 0:
+                break
+            else:
+                print("dokładność musi być większy niż 0!")
+        except ValueError:
+            print("Niepoprawna dokładność!")
+
+    return precision
 
 
 def interval_menu():
@@ -104,8 +121,8 @@ def approximation_menu():
         try:
             approx = int(input('\nPodaj stopień aproksymacji wielomianu: '))
 
-            if approx < 0:
-                print('Stopień musi być >= 0!')
+            if approx < 1:
+                print('Stopień musi być > 0!')
             else:
                 break
         except ValueError:
