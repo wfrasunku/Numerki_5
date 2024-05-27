@@ -16,3 +16,9 @@ def evaluate_composite(x: float, functions: list):
     for i in range(1, len(functions)):
         result = functions[i].evaluate(result)
     return result
+
+
+def power_int(x: float, exponent: int) -> float:
+    for i in range(exponent):
+        x *= x
+    return x
